@@ -2,10 +2,15 @@ package com.hexa.jpademo.dto;
 
 import com.hexa.jpademo.entity.Product;
 
+import jakarta.validation.constraints.NotEmpty;
+
 public class ProductDTO {
 	
+	@NotEmpty
 	private String stock;
+	@NotEmpty
 	private String description;
+	@NotEmpty
 	private String name;
 	private boolean active;
 	private String imageURL;

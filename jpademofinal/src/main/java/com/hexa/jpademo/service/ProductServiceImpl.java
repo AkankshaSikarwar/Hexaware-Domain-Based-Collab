@@ -68,7 +68,7 @@ public class ProductServiceImpl implements ProductService{
 
 	@Override
 	public Product searchProductById(Long id) throws ResourceNotFoundException{
-		Product obj= this.productRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("user","id",id));
+		Product obj= this.productRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("product","id",id));
 		return obj;
 	}
 

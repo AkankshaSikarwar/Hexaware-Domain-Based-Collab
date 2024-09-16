@@ -13,7 +13,7 @@ public class ResourceNotFoundException extends Exception{
 		this.fieldValue = fieldValue;
 	}
 	public String getMessage() {
-		return "Resource not found";
+		return this.resourceName+ " is not found with "+this.fieldName+" value "+this.fieldValue;
 		
 	}
 	

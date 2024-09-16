@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,8 @@ import com.hexa.jpademo.dto.ProductDTO;
 import com.hexa.jpademo.entity.Product;
 import com.hexa.jpademo.mapper.ProductMapper;
 import com.hexa.jpademo.service.ProductService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/productapp")
@@ -41,14 +44,7 @@ public class ProductController {
 		this.productService = productService;
 	}
 
-	public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exceptionObj,
-			WebRequest w) {
-		ErrorDetails e = new ErrorDetails(LocalDateTime.now(), exceptionObj.getMessage(), w.getDescription(true),
-				"USER_NOT_FOUND");
-
-		return null;
-
-	}
+	
 
 	// http://localhost:8080/api/v1/productapp/searchbyname?name=mouse
 	@GetMapping("/searchbyname")
@@ -83,7 +79,7 @@ public class ProductController {
 //	}
 
 	@PostMapping("/addproduct")
-	public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO p) {
+	public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductDTO p) {
 
 		// this save entity will return product and we don't want to return the same
 		// product in reponse body
